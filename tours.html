@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BITraveler — All Tours</title>
+<style>
+  :root{
+    --orange: #FF9A3E;
+    --orange-dark: #F98C29;
+    --navy: #16233F;
+    --gray: #7A8699;
+    --lightgray: #F4F6F9;
+    --blue-band: #CFE9F4;
+    --radius: 18px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI', Arial, sans-serif; color:var(--navy); background:#fff; line-height:1.5;}
+  img{display:block; width:100%; height:100%; object-fit:cover;}
+  a{text-decoration:none; color:inherit;}
+  ul{list-style:none;}
+  .container{max-width:1200px; margin:0 auto; padding:0 24px;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    background:var(--orange); color:#fff; border:none; padding:12px 26px;
+    border-radius:30px; font-weight:600; cursor:pointer;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .btn:hover{background:var(--orange-dark); transform:translateY(-2px);}
+  .btn-outline{
+    background:#fff; color:var(--navy); border:1px solid #ddd;
+    padding:12px 34px; border-radius:30px; font-weight:600; cursor:pointer;
+  }
+  .btn-outline:hover{border-color:var(--orange); color:var(--orange-dark);}
+
+  /* HEADER */
+  header{display:flex; align-items:center; justify-content:space-between; padding:22px 0;}
+  .logo{display:flex; align-items:center; gap:8px; font-weight:800; font-size:20px;}
+  .logo span{color:var(--orange);}
+  nav ul{display:flex; gap:34px; font-weight:500;}
+  nav a.active{color:var(--orange); font-weight:700;}
+  .header-right{display:flex; align-items:center; gap:26px; font-weight:500;}
+
+  /* PAGE BANNER */
+  .banner{
+    position:relative; height:420px; border-radius:0 0 0 0; overflow:hidden;
+    margin-bottom:70px;
+  }
+  .banner img{width:100%; height:100%; object-fit:cover;}
+  .banner .overlay{
+    position:absolute; inset:0; background:rgba(0,20,40,.15);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .banner h1{color:#fff; font-size:52px; font-weight:800;}
+  .banner h1 .accent{color:var(--orange);}
+
+  /* SEARCH BAR */
+  .search-bar{
+    display:flex; align-items:center; justify-content:space-between;
+    background:#fff; border:1px solid #ececec; border-radius:60px;
+    box-shadow:0 15px 40px rgba(0,0,0,.06);
+    padding:14px 30px; margin-bottom:90px; position:relative;
+  }
+  .search-field{display:flex; align-items:center; gap:10px; flex:1;}
+  .search-field .icon{
+    width:34px;height:34px;border-radius:50%;background:var(--lightgray);
+    display:flex;align-items:center;justify-content:center;font-size:16px;
+  }
+  .search-field div p{font-weight:600; font-size:14px;}
+  .search-field div span{font-size:12px; color:var(--gray);}
+  .search-bar .divider{width:1px; height:34px; background:#eee; margin:0 20px;}
+  .search-btn{
+    width:46px;height:46px;border-radius:50%;background:var(--orange);
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    border:none; cursor:pointer; font-size:16px;
+  }
+  .plane-trail{position:absolute; right:-40px; top:-30px; font-size:26px; opacity:.7;}
+
+  /* FEATURED TOURS */
+  .section-label{font-family:Georgia, serif; font-style:italic; color:var(--orange); font-size:18px; margin-bottom:10px;}
+  .section-title{font-size:32px; font-weight:800; margin-bottom:50px; text-align:center;}
+  .section-title .accent{color:var(--orange);}
+
+  .tours-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:200px;
+    gap:16px; margin-bottom:22px;
+  }
+  .tour-card{position:relative; border-radius:var(--radius); overflow:hidden; color:#fff;}
+  .tour-card::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%);}
+  .tour-card .label{position:absolute; bottom:16px; left:20px; z-index:2;}
+  .tour-card .label .city-script{font-family:Georgia, serif; font-style:italic; font-size:22px; display:block;}
+  .tour-card .label .country{font-weight:700; font-size:17px; letter-spacing:.5px;}
+
+  .row-big{grid-column: span 2; grid-row: span 2;}
+  .row-small{grid-column: span 1; grid-row: span 1;}
+
+  .load-more-wrap{display:flex; justify-content:center; margin:40px 0 110px;}
+
+  /* NEWSLETTER */
+  .newsletter{
+    background:var(--blue-band); border-radius:28px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:50px 60px; gap:30px; margin-bottom:60px; overflow:hidden;
+  }
+  .newsletter-text{max-width:480px;}
+  .newsletter-text h2{font-size:26px; font-weight:800; margin-bottom:22px;}
+  .subscribe-form{display:flex; gap:12px; margin-bottom:18px;}
+  .subscribe-form input{flex:1; border:none; border-radius:30px; padding:14px 22px; font-size:14px; outline:none;}
+  .newsletter-text p.small{font-size:13px; color:#4b5b66;}
+  .newsletter-img{width:260px;}
+
+  /* FOOTER */
+  footer{padding:50px 0 30px;}
+  .footer-top{display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap; margin-bottom:40px;}
+  .footer-brand{max-width:260px;}
+  .footer-brand p{color:var(--gray); font-size:13px; margin:14px 0 20px;}
+  .socials{display:flex; gap:12px;}
+  .socials a{width:34px; height:34px; border-radius:50%; background:var(--orange); color:#fff; display:flex; align-items:center; justify-content:center; font-size:14px;}
+  .footer-col h4{font-size:15px; margin-bottom:18px;}
+  .footer-col li{margin-bottom:12px; color:var(--gray); font-size:14px;}
+  .footer-bottom{border-top:1px solid #eee; padding-top:20px; text-align:center; color:var(--gray); font-size:13px;}
+  .footer-bottom a{color:var(--orange);}
+
+  @media(max-width:960px){
+    .tours-grid{grid-template-columns:repeat(2,1fr);}
+    .row-big{grid-column:span 2;}
+    nav{display:none;}
+    .banner h1{font-size:36px;}
+    .newsletter{flex-direction:column; text-align:center;}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="logo">BI<span>Traveler</span></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="tours.html" class="active">Tours</a></li>
+      </ul>
+    </nav>
+    <div class="header-right">
+      <a href="login.html">Login</a>
+      <a href="register.html" class="btn">Register</a>
+    </div>
+  </header>
+</div>
+
+<div class="banner">
+  <img src="https://picsum.photos/seed/all-tours-maldives/1600/500" alt="Aerial view of tropical island resort">
+  <div class="overlay"><h1><span class="accent">All</span>&nbsp;Tours</h1></div>
+</div>
+
+<div class="container">
+
+  <div class="search-bar">
+    <div class="search-field">
+      <div class="icon">📍</div>
+      <div><p>Location</p><span>Where are you going?</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="search-field">
+      <div class="icon">📏</div>
+      <div><p>Distance</p><span>Distance km</span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="search-field">
+      <div class="icon">🧑</div>
+      <div><p>Max People</p><span>0</span></div>
+    </div>
+    <button class="search-btn">🔍</button>
+    <span class="plane-trail">✈️</span>
+  </div>
+
+  <h2 class="section-title">Our Featured <span class="accent">Tours</span></h2>
+
+  <div class="tours-grid">
+    <div class="tour-card row-big">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Dubai%20Marina%20Skyline.jpg" alt="Dubai, UAE" onerror="this.src='https://picsum.photos/seed/dubai-tours/700/700'">
+      <div class="label"><span class="city-script">Dubai</span><span class="country">UAE</span></div>
+    </div>
+    <div class="tour-card row-big">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pura%20Tanah%20Lot%2C%20Bali%2C%20Indonesia%2C%2020220827%201029%201193.jpg" alt="Bali, Indonesia" onerror="this.src='https://picsum.photos/seed/bali-tours/700/700'">
+      <div class="label"><span class="city-script">Bali</span><span class="country">INDONESIA</span></div>
+    </div>
+
+    <div class="tour-card row-small">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sydney%20Opera%20House%20Night.jpg" alt="Sydney, Australia" onerror="this.src='https://picsum.photos/seed/sydney-tours/400/300'">
+      <div class="label"><span class="city-script">Sydney</span><span class="country">AUSTRALIA</span></div>
+    </div>
+    <div class="tour-card row-small">
+      <img src="https://picsum.photos/seed/phetchabun-tours/400/300" alt="Phetchabun, Indonesia">
+      <div class="label"><span class="city-script">Phetchabun</span><span class="country">INDONESIA</span></div>
+    </div>
+    <div class="tour-card row-small">
+      <img src="https://picsum.photos/seed/wuxi-tours/400/300" alt="Wuxi, China">
+      <div class="label"><span class="city-script">Wuxi</span><span class="country">CHINA</span></div>
+    </div>
+
+    <div class="tour-card row-big">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Big%20Ben%2C%20Westminster%20Abbey%2C%20London.jpg" alt="Big Ben, London" onerror="this.src='https://picsum.photos/seed/bigben-tours/700/700'">
+      <div class="label"><span class="city-script">Big Ben</span><span class="country">LONDON</span></div>
+    </div>
+    <div class="tour-card row-big">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Eiffel%20Tower%20at%20Night%20in%20Paris.jpg" alt="Paris, France" onerror="this.src='https://picsum.photos/seed/paris-tours/700/700'">
+      <div class="label"><span class="city-script">Paris</span><span class="country">FRANCE</span></div>
+    </div>
+
+    <div class="tour-card row-small">
+      <img src="https://picsum.photos/seed/maldives-tours/400/300" alt="Maldives">
+      <div class="label"><span class="city-script">Paradise Island</span><span class="country">MALDIVES</span></div>
+    </div>
+    <div class="tour-card row-small">
+      <img src="https://picsum.photos/seed/phiphi-tours/400/300" alt="Phi Phi Island, Thailand">
+      <div class="label"><span class="city-script">Phi Phi Island</span><span class="country">THAILAND</span></div>
+    </div>
+    <div class="tour-card row-small">
+      <img src="https://picsum.photos/seed/elnido-tours/400/300" alt="El Nido, Philippines">
+      <div class="label"><span class="city-script">El Nido</span><span class="country">PHILIPPINES</span></div>
+    </div>
+  </div>
+
+  <div class="load-more-wrap">
+    <button class="btn-outline">Load More</button>
+  </div>
+
+  <section class="newsletter">
+    <div class="newsletter-text">
+      <h2>Subscribe now to get useful traveling information</h2>
+      <div class="subscribe-form">
+        <input type="email" placeholder="Enter your email">
+        <button class="btn">Subscribe</button>
+      </div>
+      <p class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit. Obcaecati adipisci sunt in, provident facere ipsam?</p>
+    </div>
+    <div class="newsletter-img">
+      <img src="https://picsum.photos/seed/newsletter-traveler/300/380" alt="Traveler with backpack" style="border-radius:20px;">
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">BI<span>Traveler</span></div>
+        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Commodi, enim.</p>
+        <div class="socials">
+          <a href="#">▶</a><a href="#">🐦</a><a href="#">f</a><a href="#">📷</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Discover</h4>
+        <ul><li>Home</li><li>About</li><li>Tours</li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul><li>Gallery</li><li><a href="login.html">Login</a></li><li><a href="register.html">Register</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>📍 Address: Lorem</li>
+          <li>✉️ Email: xyz@mail.com</li>
+          <li>📞 Phone: 00022200222</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2024 <a href="#">Vipin_uidesigns</a>. All Rights Reserved</div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BITraveler — About Us</title>
+<style>
+  :root{
+    --orange: #FF9A3E;
+    --orange-dark: #F98C29;
+    --navy: #16233F;
+    --gray: #7A8699;
+    --lightgray: #F4F6F9;
+    --blue-band: #CFE9F4;
+    --radius: 18px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI', Arial, sans-serif; color:var(--navy); background:#fff; line-height:1.5;}
+  img{display:block; width:100%; height:100%; object-fit:cover;}
+  a{text-decoration:none; color:inherit;}
+  ul{list-style:none;}
+  .container{max-width:1200px; margin:0 auto; padding:0 24px;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    background:var(--orange); color:#fff; border:none; padding:12px 26px;
+    border-radius:30px; font-weight:600; cursor:pointer;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .btn:hover{background:var(--orange-dark); transform:translateY(-2px);}
+
+  /* HEADER */
+  header{display:flex; align-items:center; justify-content:space-between; padding:22px 0;}
+  .logo{display:flex; align-items:center; gap:8px; font-weight:800; font-size:20px;}
+  .logo span{color:var(--orange);}
+  nav ul{display:flex; gap:34px; font-weight:500;}
+  nav a.active{color:var(--orange); font-weight:700;}
+  .header-right{display:flex; align-items:center; gap:26px; font-weight:500;}
+
+  /* BANNER */
+  .banner{position:relative; height:420px; overflow:hidden; margin-bottom:80px;}
+  .banner img{width:100%; height:100%; object-fit:cover;}
+  .banner .overlay{position:absolute; inset:0; background:rgba(0,20,40,.15); display:flex; align-items:center; justify-content:center;}
+  .banner h1{color:#fff; font-size:52px; font-weight:800;}
+  .banner h1 .accent{color:var(--orange);}
+
+  /* WHO WE ARE / MISSION */
+  .about-section{
+    display:flex; justify-content:space-between; gap:60px; margin-bottom:110px;
+  }
+  .about-text{max-width:480px; display:flex; flex-direction:column; gap:44px;}
+  .about-text h2{font-size:32px; font-weight:700; margin-bottom:14px;}
+  .about-text h2 .accent{color:var(--orange); font-weight:800;}
+  .about-text p{color:var(--gray); font-size:15px;}
+  .about-img{width:460px; border-radius:var(--radius); overflow:hidden; flex-shrink:0;}
+  .about-img img{height:420px;}
+
+  /* SERVICES */
+  .services-wrap{display:flex; align-items:flex-start; gap:60px; margin-bottom:110px; flex-wrap:wrap;}
+  .services-heading{max-width:280px;}
+  .section-label{font-family:Georgia, serif; font-style:italic; color:var(--orange); font-size:18px; margin-bottom:10px;}
+  .services-heading h2{font-size:28px; font-weight:800;}
+  .services{display:flex; gap:24px; flex:1; flex-wrap:wrap;}
+  .service-card{
+    flex:1; min-width:220px; background:#fff; border:1px solid #eee; border-radius:var(--radius);
+    padding:34px 26px; box-shadow:0 15px 35px rgba(0,0,0,.04); border-bottom:4px solid var(--orange);
+  }
+  .service-card .ico{
+    width:52px;height:52px;border-radius:50%;background:var(--orange);
+    display:flex;align-items:center;justify-content:center;font-size:22px; margin-bottom:22px;
+  }
+  .service-card h3{font-size:19px; margin-bottom:10px;}
+  .service-card p{color:var(--gray); font-size:14px;}
+
+  /* NEWSLETTER */
+  .newsletter{
+    background:var(--blue-band); border-radius:28px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:50px 60px; gap:30px; margin-bottom:60px; overflow:hidden;
+  }
+  .newsletter-text{max-width:480px;}
+  .newsletter-text h2{font-size:26px; font-weight:800; margin-bottom:22px;}
+  .subscribe-form{display:flex; gap:12px; margin-bottom:18px;}
+  .subscribe-form input{flex:1; border:none; border-radius:30px; padding:14px 22px; font-size:14px; outline:none;}
+  .newsletter-text p.small{font-size:13px; color:#4b5b66;}
+  .newsletter-img{width:260px;}
+
+  /* FOOTER */
+  footer{padding:50px 0 30px;}
+  .footer-top{display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap; margin-bottom:40px;}
+  .footer-brand{max-width:260px;}
+  .footer-brand p{color:var(--gray); font-size:13px; margin:14px 0 20px;}
+  .socials{display:flex; gap:12px;}
+  .socials a{width:34px; height:34px; border-radius:50%; background:var(--orange); color:#fff; display:flex; align-items:center; justify-content:center; font-size:14px;}
+  .footer-col h4{font-size:15px; margin-bottom:18px;}
+  .footer-col li{margin-bottom:12px; color:var(--gray); font-size:14px;}
+  .footer-bottom{border-top:1px solid #eee; padding-top:20px; text-align:center; color:var(--gray); font-size:13px;}
+  .footer-bottom a{color:var(--orange);}
+
+  @media(max-width:960px){
+    .about-section{flex-direction:column;}
+    .about-img{width:100%;}
+    nav{display:none;}
+    .banner h1{font-size:36px;}
+    .newsletter{flex-direction:column; text-align:center;}
+    .services-wrap{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="logo">BI<span>Traveler</span></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="tours.html">Tours</a></li>
+      </ul>
+    </nav>
+    <div class="header-right">
+      <a href="login.html">Login</a>
+      <a href="register.html" class="btn">Register</a>
+    </div>
+  </header>
+</div>
+
+<div class="banner">
+  <img src="https://picsum.photos/seed/about-us-maldives/1600/500" alt="Aerial view of tropical island with overwater bungalows">
+  <div class="overlay"><h1>About&nbsp;<span class="accent">Us</span></h1></div>
+</div>
+
+<div class="container">
+
+  <section class="about-section">
+    <div class="about-text">
+      <div>
+        <h2>Who <span class="accent">We Are?</span></h2>
+        <p>We're all about creating unforgettable experiences for our guests. Our journey began with a simple passion for exploring the beauty of the World.</p>
+      </div>
+      <div>
+        <h2>Our <span class="accent">Mission</span></h2>
+        <p>We believe that travel is not just about visiting new places, but about immersing yourself in new cultures, connecting with nature, and making memories that last a lifetime.</p>
+      </div>
+    </div>
+    <div class="about-img">
+      <img src="https://picsum.photos/seed/about-boat-canyon/460/420" alt="Boat between limestone cliffs in turquoise lagoon">
+    </div>
+  </section>
+
+  <section class="services-wrap">
+    <div class="services-heading">
+      <span class="section-label">What we serve</span>
+      <h2>We offer our best services</h2>
+    </div>
+    <div class="services">
+      <div class="service-card">
+        <div class="ico">🌤️</div>
+        <h3>Calculate Weather</h3>
+        <p>Lorem ipsum dolor sit amet, adipiscing elit.</p>
+      </div>
+      <div class="service-card">
+        <div class="ico">🎓</div>
+        <h3>Best Tour Guide</h3>
+        <p>Lorem ipsum dolor sit amet, adipiscing elit.</p>
+      </div>
+      <div class="service-card">
+        <div class="ico">🖼️</div>
+        <h3>Customization</h3>
+        <p>Lorem ipsum dolor sit amet, adipiscing elit.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="newsletter-text">
+      <h2>Subscribe now to get useful traveling information</h2>
+      <div class="subscribe-form">
+        <input type="email" placeholder="Enter your email">
+        <button class="btn">Subscribe</button>
+      </div>
+      <p class="small">Lorem ipsum dolor sit amet consectetur adipiscing elit. Obcaecati adipisci sunt in, provident facere ipsam?</p>
+    </div>
+    <div class="newsletter-img">
+      <img src="https://picsum.photos/seed/newsletter-traveler/300/380" alt="Traveler with backpack" style="border-radius:20px;">
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">BI<span>Traveler</span></div>
+        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Commodi, enim.</p>
+        <div class="socials">
+          <a href="#">▶</a><a href="#">🐦</a><a href="#">f</a><a href="#">📷</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Discover</h4>
+        <ul><li>Home</li><li>About</li><li>Tours</li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul><li>Gallery</li><li><a href="login.html">Login</a></li><li><a href="register.html">Register</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>📍 Address: Lorem</li>
+          <li>✉️ Email: xyz@mail.com</li>
+          <li>📞 Phone: 00022200222</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2024 <a href="#">Vipin_uidesigns</a>. All Rights Reserved</div>
+  </footer>
+
+</div>
+</body>
+</html>
